@@ -5,57 +5,7 @@ import { Router, Route, Link } from './react-router'
 
 import Home from './pages/Home'
 import SnowReport from './pages/SnowReport'
-
-const appStyles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    height: '100%',
-    backgroundColor: '#173963',
-    color: '#1F2937',
-    position: 'relative'
-  },
-  scrollView: {
-    flex: 1
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: '#f4ce3c',
-    paddingBottom: 10
-  },
-  headerContainer: {
-    display: 'flex',
-    height: '10%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 8
-  },
-  footerWrapper: {
-    display: 'flex',
-    height: '10%'
-  },
-  footer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexShrink: 0,
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#173963',
-    paddingTop: 6,
-  },
-  linkText: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 20
-  }
-})
+import styles from './components/styles';
 
 const App = () => {
 
@@ -113,28 +63,29 @@ const App = () => {
   //
   return(
     <Router>
-      <SafeAreaView style={appStyles.container}>
+      <SafeAreaView style={styles.container}>
         {/* <ScrollView
-            contentContainerStyle={appStyles.scrollView}
+            contentContainerStyle={styles.scrollView}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
               />}
         > */}
-        <View style={appStyles.headerContainer}>
-          <Text style={appStyles.title}>🦅 Solid 'Tude</Text>
+        <View style={styles.headerContainer}>
+          <Text style={{fontSize: 44, paddingBottom: 12, paddingRight: 12}}>🦅</Text>
+          <Text style={styles.title}>Solid 'tude</Text>
         </View>
         
-        <Route exact path="/" component={ ()=> <Home lastResponseTime={soliResponse.LastUpdate} mountainAreas={soliResponse.MountainAreas} /> } />
-        <Route path="/snow-report" component={ ()=> <SnowReport lastResponseTime={soliResponse.LastUpdate} snowReport={soliResponse.SnowReport} forecast={soliResponse.Forecast} /> } />
-        <View style={appStyles.footerWrapper}>
-          <View style={appStyles.footer}>
+        <Route exact path="/" component={ ()=> <Home lastResponseTime={soliResponse.LastUpdate} snowReport={soliResponse.SnowReport} mountainAreas={soliResponse.MountainAreas} /> } />
+        <Route path="/snow-report" component={ ()=> <SnowReport lastResponseTime={soliResponse.LastUpdate} snowReport={soliResponse.SnowReport} currentConditions={soliResponse.CurrentConditions} forecast={soliResponse.Forecast} /> } />
+        <View style={styles.footerWrapper}>
+          <View style={styles.footer}>
             <Link to="/">
-              <Text style={appStyles.linkText}>Openings</Text>
+              <Text style={styles.linkText}>Openings</Text>
             </Link>
             <Link to="/snow-report">
-              <Text style={appStyles.linkText}>Snow Report</Text>
+              <Text style={styles.linkText}>Snow Report</Text>
             </Link>
           </View>
         </View>
