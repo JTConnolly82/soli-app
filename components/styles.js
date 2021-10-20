@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '80%'
   },
+  snowPage: {
+    backgroundColor: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    height: '80%'
+  },
   cell: {
     width: '49%',
     display: 'flex',
@@ -102,11 +108,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 14,
     marginTop: 4,
-    marginHorizontal: 16,
     borderRadius: 8,
     backgroundColor: '#f5f5f5'
   },
-  title: {
+  areaTitle: {
     fontSize: 22,
     color: '#3a3e6c'
   },
@@ -116,19 +121,24 @@ const styles = StyleSheet.create({
     color: '#56586c'
   },
   weatherWrapper: {
-    marginTop: 24,
+    marginTop: 8,
     marginHorizontal: 12,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingHorizontal: 8,
-    paddingVertical: 12
+    flexDirection: 'row'
   },
-  currentWeather: {
-
+  weatherDiv: {
+    display: 'flex',
+    padding: 30
   },
-  todaysWeather: {
-
+  weatherTitle: {
+    textAlign: 'center',
+    fontSize: 24,
+    color: '#3a3e6c'
+  },
+  temps: {
+    textAlign: 'center',
+    fontSize: 22,
+    color: '#47485b'
   },
   snowSectionWrapper: {
     marginTop: 24,
@@ -139,10 +149,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 12
   },
+  snowBaseRow: {
+    marginVertical: 16,
+    width: '98%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 16,
+    fontSize: 24,
+    borderRadius: 6,
+    backgroundColor: '#f4f4f4'
+  },
+  recentSnowTitle: {
+    fontSize: 23,
+    color: '#3a3e6c',
+    marginBottom: 4,
+    textAlign: 'center'
+  },
   snowTotalsWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    width: 400
+    width: '98%',
+    backgroundColor: '#f4f4f4',
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 10,
   },
   snowTotalsHeader: {
     display: 'flex',
@@ -150,25 +181,26 @@ const styles = StyleSheet.create({
   },
   snowTableRow: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   headerCellFirst: {
     backgroundColor: '#cdcdcd',
     display: 'flex',
     flexDirection: 'row',
     padding: 6,
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   headerCell: {
-    backgroundColor: '#cdcdcd',
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
     padding: 6,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    borderBottomWidth: 2,
+    borderBottomColor: '#d2af26'
   },
   tableCell: {
-    backgroundColor: '#e9e9e9',
     flex: 1,
     display: 'flex',
     flexDirection: 'row',
@@ -176,6 +208,12 @@ const styles = StyleSheet.create({
     padding: 6,
     justifyContent: 'center'
   },
+  tableItem: {
+    fontSize: 20
+  },
+  tableHeaderItem: {
+    fontSize: 18
+  }
 })
 
 export default styles;

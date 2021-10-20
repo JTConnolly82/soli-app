@@ -61,6 +61,10 @@ const App = () => {
   // array of terrain areas w/ name, status, close time(?), time updated at (could even display how long ago it opened?)
   // array of runs w/ name, status, level(green, blue, black, double)
   //
+
+  
+
+
   return(
     <Router>
       <SafeAreaView style={styles.container}>
@@ -96,8 +100,10 @@ const App = () => {
 };
 
 export default App;
-
-
+//
+// NOTE!!!   DO NOT DELETE INCASE API IS DELETED OR CHANGES IN MAJOR WAY
+//           SO CAN STILL DISPLAY IF DON'T HAVE TIME TO FIX
+//
 let soliResponse = (
   {
     "Name": "Solitude",
