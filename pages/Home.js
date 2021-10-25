@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { ProgressCircle } from 'react-native-svg-charts'
+import { ProgressCircle } from 'react-native-svg-charts';
 import styles from '../components/styles';
 
 
@@ -19,37 +19,37 @@ import styles from '../components/styles';
 
 
 const Home = (props) => {
-  console.log(props)
-  let mtnAreas = props.mountainAreas.map(area => {
-    if (area.Name != 'Nordic') {
-      return (
-        <View style={styles.areaRow} key={area.Name}>
-          <Text style={styles.areaTitle}>{area.Name}</Text>
-          <Text style={styles.areaStatus}>{area.Activities[0].Status}</Text>
-        </View>)
-    }
-  })
+  // console.log('--- mountain areas ---', props.mountainAreas)
+  // let mtnAreas = props.mountainAreas.forEach(area => {
+  //   if (area.Name != 'Nordic') {
+  //     return (
+  //       <View style={styles.areaRow} key={area.Activities.Name}>
+  //         <Text style={styles.areaTitle}>{area.Activities.Name}</Text>
+  //         <Text style={styles.areaStatus}>{area.Activities[0].Status}</Text>
+  //       </View>)
+  //   }
+  // })
 
   return (
     <View style={styles.page}>
       <View style={styles.row}>
         <View style={styles.cell}> 
-          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={3 / 8} progressColor={'#d2af26'} />
+          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={7 / 8} progressColor={'#d2af26'} />
           <View style={styles.totalLifts}>
-            <Text style={styles.amount}>{3}</Text>
+            <Text style={styles.amount}>{7}</Text>
           </View>
           <Text style={styles.description}>Lifts</Text>
         </View>
         <View style={styles.cell}>
-          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={66 / 82} progressColor={'#d2af26'} />
+          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={65 / 82} progressColor={'#d2af26'} />
           <View style={styles.totalRuns}>
-            <Text style={styles.amount}>{33}</Text>
+            <Text style={styles.amount}>{65}</Text>
             <Text></Text>
           </View>
           <Text style={styles.description}>Runs</Text>
         </View>
       </View>
-        { mtnAreas }
+        {/* { mtnAreas } */}
       <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {props.lastResponseTime}</Text>
     </View>
   )

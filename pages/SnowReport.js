@@ -6,7 +6,7 @@ import Webcams from '../components/Webcams'
 
 
 const SnowReport = (props) => {
-  //console.log(props.snowReport)
+  console.log('snow report ' , props.snowReport)
   return (
     <View style={styles.snowPage}>
       <View style={styles.weatherWrapper}>
@@ -58,22 +58,22 @@ const SnowReport = (props) => {
           <View style={styles.snowTableRow}>
             <View style={styles.tableCell}>
               <Text style={styles.tableItem}>
-                2"
+                {props.snowReport.MidMountainArea.SinceLiftsClosedIn}"
               </Text>
             </View>
             <View style={styles.tableCell}>
               <Text style={styles.tableItem}>
-                0"
+                {props.snowReport.MidMountainArea.Last24HoursIn}"
               </Text>
             </View>
             <View style={styles.tableCell}>
               <Text style={styles.tableItem}>
-                6"
+              {props.snowReport.MidMountainArea.Last48HoursIn}"
               </Text>
             </View>
             <View style={styles.tableCell}>
               <Text style={styles.tableItem}>
-                9"
+              {props.snowReport.MidMountainArea.Last72HoursIn}"
               </Text>
             </View>
           </View>
