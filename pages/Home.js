@@ -17,18 +17,17 @@ import styles from '../components/styles';
 //Todo: progress circle's progress will be number of lifts_open/total_lifts, runs_open/total_runs
 //Todo: Need to find what the statuses are beyond 'closed for the season'...
 
-
 const Home = (props) => {
-  // console.log('--- mountain areas ---', props.mountainAreas)
-  // let mtnAreas = props.mountainAreas.forEach(area => {
-  //   if (area.Name != 'Nordic') {
-  //     return (
-  //       <View style={styles.areaRow} key={area.Activities.Name}>
-  //         <Text style={styles.areaTitle}>{area.Activities.Name}</Text>
-  //         <Text style={styles.areaStatus}>{area.Activities[0].Status}</Text>
-  //       </View>)
-  //   }
-  // })
+  console.log('--- mountain areas ---', props.soliResponse.MountainAreas)
+  // const mtnAreas = props.soliResponse.MountainAreas.forEach(area => {
+  // if (area.Name != 'Nordic') {
+  //   return (
+  //     <View style={styles.areaRow} key={area.Activities.Name}>
+  //       <Text style={styles.areaTitle}>{area.Activities.Name}</Text>
+  //       <Text style={styles.areaStatus}>{area.Activities[0].Status}</Text>
+  //     </View>)
+  // }
+// }
 
   return (
     <View style={styles.page}>
@@ -50,7 +49,7 @@ const Home = (props) => {
         </View>
       </View>
         {/* { mtnAreas } */}
-      <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {props.lastResponseTime}</Text>
+      <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {props.soliResponse.LastResponseTime}</Text>
     </View>
   )
 }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, RefreshControl, ScrollView } from 'react-native';
 import { Router, Route, Link } from './react-router'
+import axios from 'axios'
 
 import Home from './pages/Home'
 import SnowReport from './pages/SnowReport'
@@ -13,15 +14,20 @@ const App = () => {
     const [loading, setLoading] = useState(true);
 
     const fetchData = async () => {
-        const response = await fetch('https://alerts.quicktrax.com/feed?resortId=65&format=json')
-        const data = await response.json()
-        // console.log(data)
-        setSoliResponse(data)
-        setLoading(false)
+        axios.get('https://alerts.quicktrax.com/feed?resortId=65&format=json')
+        .then(function (response) {
+          console.log('fetch response', response.data)
+          setSoliResponse(response.data)
+          setLoading(false)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     useEffect(() => {
         fetchData();
+        console.log('soli mountain areas', soliResponse)
       }, []);
       
 
@@ -89,20 +95,20 @@ const App = () => {
 
         {soliResponse && (
             <>
-                <Route exact path="/" component={ ()=> <Home lastResponseTime={soliResponse.LastUpdate} snowReport={soliResponse.SnowReport} mountainAreas={soliResponse.MountainAreas} /> } />
-                <Route path="/snow-report" component={ ()=> <SnowReport lastResponseTime={soliResponse.LastUpdate} snowReport={soliResponse.SnowReport} currentConditions={soliResponse.CurrentConditions} forecast={soliResponse.Forecast} /> } />
-                <View style={styles.footerWrapper}>
-                <View style={styles.footer}>
-                    <Link to="/">
-                    <Text style={styles.linkText}>Openings</Text>
-                    </Link>
-                    <Link to="/snow-report">
-                    <Text style={styles.linkText}>Snow Report</Text>
-                    </Link>
-                </View>
-                </View>
+                <Route exact path="/" component={ ()=> <Home soliResponse={soliResponse} /> } />
+                <Route path="/snow-report" component={ ()=> <SnowReport soliResponse={soliResponse} /> } />
             </>
         )}
+        <View style={styles.footerWrapper}>
+          <View style={styles.footer}>
+              <Link to="/">
+                <Text style={styles.linkText}>Openings</Text>
+              </Link>
+              <Link to="/snow-report">
+                <Text style={styles.linkText}>Snow Report</Text>
+              </Link>
+          </View>
+        </View>
       {/* </ScrollView> */}
     </SafeAreaView>
   </Router>
