@@ -1,79 +1,13 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, RefreshControl, ScrollView } from 'react-native';
 import { Router, Route, Link } from './react-router'
-import axios from 'axios'
 
 import Home from './pages/Home'
 import SnowReport from './pages/SnowReport'
 import styles from './components/styles';
 
 const App = () => {
-
-    const [soliResponse, setSoliResponse] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchData = async () => {
-        axios.get('https://alerts.quicktrax.com/feed?resortId=65&format=json')
-        .then(function (response) {
-          console.log('fetch response', response.data)
-          setSoliResponse(response.data)
-          setLoading(false)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    useEffect(() => {
-        fetchData();
-        console.log('soli mountain areas', soliResponse)
-      }, []);
-      
-
-
-//   callSolitudeAPI = () => {
-//     return fetch('https://alerts.quicktrax.com/feed?resortId=65&format=json')
-//     .then((json) => {
-//       res = JSON.parse(json)
-//       console.log('response', res.LastUpdate)
-//       setSoliResponse(res)
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-    
-//     // loop over the object and push the items into their respective arrays 
-
-//     let today = new Date()
-//     today = today.getDay() //today will be 0-7, can use to find the day's operating hours for each lift
-
-//     // soliResponse.MountainAreas.forEach(area => {
-//     //   if(area.Name != 'Nordic') {
-//     //     areasArray.push(area)
-//     //   }
-//     //   // area.Lifts.forEach(lift => {
-//     //   //   //lift.Name
-//     //   //   //lift.Status
-//     //   //   //lift.UpdateDate
-//     //   //   //lift.Hours[today].Open
-//     //   //   //lift.Hours[today].Close
-
-//     //   // })
-//     // })
-
-//     // let snowReportData = soliResponse.SnowReport
-//     // return snowReportData
-//   }
-
-  // !!! TO RETURN FROM THE SOLITUDE API OBJECT !!!!
-  // array of lifts w/ name, status, open time, close time
-  // array of terrain areas w/ name, status, close time(?), time updated at (could even display how long ago it opened?)
-  // array of runs w/ name, status, level(green, blue, black, double)
-  //
-
-  
-
 
   return(
     <Router>
@@ -90,15 +24,8 @@ const App = () => {
           <Text style={{fontSize: 44, paddingBottom: 12, paddingRight: 12}}>🦅</Text>
           <Text style={styles.title}>Solitude</Text>
         </View>
-
-        {loading && <Text>Loading..</Text>}
-
-        {soliResponse && (
-            <>
-                <Route exact path="/" component={ ()=> <Home soliResponse={soliResponse} /> } />
-                <Route path="/snow-report" component={ ()=> <SnowReport soliResponse={soliResponse} /> } />
-            </>
-        )}
+        <Route exact path="/" component={ ()=> <Home /> } />
+        <Route path="/snow-report" component={ ()=> <SnowReport /> } />
         <View style={styles.footerWrapper}>
           <View style={styles.footer}>
               <Link to="/">

@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, View, Text, FlatList } from 'react-native';
 import { ProgressCircle } from 'react-native-svg-charts';
+
 import styles from '../components/styles';
 
 
@@ -17,40 +18,63 @@ import styles from '../components/styles';
 //Todo: progress circle's progress will be number of lifts_open/total_lifts, runs_open/total_runs
 //Todo: Need to find what the statuses are beyond 'closed for the season'...
 
-const Home = (props) => {
-  console.log('--- mountain areas ---', props.soliResponse.MountainAreas)
-  // const mtnAreas = props.soliResponse.MountainAreas.forEach(area => {
-  // if (area.Name != 'Nordic') {
-  //   return (
-  //     <View style={styles.areaRow} key={area.Activities.Name}>
-  //       <Text style={styles.areaTitle}>{area.Activities.Name}</Text>
-  //       <Text style={styles.areaStatus}>{area.Activities[0].Status}</Text>
-  //     </View>)
-  // }
-// }
+const Home = () => {
+
+  const [isLoading, setLoading] = useState(true)
+  const [soliResponse, setSoliResponse] = useState([])
+
+  const getInfo = async () => {
+     try {
+      const response = await fetch("https://alerts.quicktrax.com/feed?resortId=65&format=json");
+      const json = await response.json();
+      setSoliResponse(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  useEffect(() => {
+    getInfo();
+  }, []);
 
   return (
-    <View style={styles.page}>
-      <View style={styles.row}>
-        <View style={styles.cell}> 
-          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={7 / 8} progressColor={'#d2af26'} />
-          <View style={styles.totalLifts}>
-            <Text style={styles.amount}>{7}</Text>
+      <View style={styles.page}>
+      {isLoading ? <ActivityIndicator /> : (
+        <>
+        <View style={styles.row}>
+          <View style={styles.cell}> 
+            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse['SnowReport']['TotalOpenTrails'] == 0 ? .5 / 82 : soliResponse['SnowReport']['TotalOpenLifts'] / soliResponse['SnowReport']['TotalLifts']} progressColor={'#d2af26'} />
+            <View style={styles.totalLifts}>
+              <Text style={styles.amount}>{soliResponse['SnowReport']['TotalLifts']}</Text>
+            </View>
+            <Text style={styles.description}>Lifts</Text>
           </View>
-          <Text style={styles.description}>Lifts</Text>
-        </View>
-        <View style={styles.cell}>
-          <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={65 / 82} progressColor={'#d2af26'} />
-          <View style={styles.totalRuns}>
-            <Text style={styles.amount}>{65}</Text>
-            <Text></Text>
+          <View style={styles.cell}>
+            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse['SnowReport']['TotalOpenTrails'] == 0 ? .5 / 82 : soliResponse['SnowReport']['TotalOpenTrails'] / soliResponse['SnowReport']['TotalTrails']} progressColor={'#d2af26'} />
+            <View style={styles.totalRuns}>
+              <Text style={styles.amount}>{soliResponse['SnowReport']['TotalTrails']}</Text>
+              <Text></Text>
+            </View>
+            <Text style={styles.description}>Runs</Text>
           </View>
-          <Text style={styles.description}>Runs</Text>
         </View>
+          <FlatList
+              data={soliResponse.MountainAreas}
+              keyExtractor={(item) => item.Name}
+              renderItem={({item}) => (
+                
+                <View style={styles.areaRow}>
+                  <Text style={styles.areaTitle}>{item['Name']}</Text>
+                  <Text style={styles.areaStatus}>{item['OpenTrailsCount'] > 0 ? 'Open' : 'Closed'}</Text>
+                </View>
+              )}
+          />
+        <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {soliResponse['LastUpdate']}</Text>
+        </>
+        )}
       </View>
-        {/* { mtnAreas } */}
-      <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {props.soliResponse.LastResponseTime}</Text>
-    </View>
   )
 }
 
