@@ -38,23 +38,23 @@ const SnowReport = () => {
           <View style={styles.weatherWrapper}>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Today</Text>
-            {/* <Text>{forecast.OneDay.skies.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")}</Text> */}
+            <Text>{soliResponse.CurrentConditions.MidMountain.Skies}</Text>
             <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.Forecast.TempHighF)} / {Math.round(soliResponse.Forecast.TempLowF)} °F</Text>
           </View>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Current</Text>
-            {/* <Text>{currentConditions.MidMountain.Skies}</Text> */}
+            <Text>{soliResponse.CurrentConditions.MidMountain.Skies}</Text>
             <Text style={{fontSize: 50, textAlign: 'center'}}>{currentWeatherIcon}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.CurrentConditions.MidMountain.TemperatureF)} °F</Text>
           </View>
         </View>
         <View style={styles.snowBaseRow}>
           <View styles={styles.cell}>
-              <Text style={styles.areaTitle}>Base: {Math.round(soliResponse['SnowReport']['MidMountainArea']['BaseIn'])}"</Text>
+              <Text style={styles.areaTitle}>Base: {Math.round(soliResponse.SnowReport.MidMountainArea.BaseIn)}"</Text>
           </View>
           <View>
-              <Text style={styles.areaTitle}>Season: {Math.round(soliResponse['SnowReport']['SeasonTotalIn'])}"</Text>
+              <Text style={styles.areaTitle}>Season: {Math.round(soliResponse.SnowReport.SeasonTotalIn)}"</Text>
           </View>
         </View>
         <View style={styles.snowTotalsWrapper}>
@@ -84,22 +84,22 @@ const SnowReport = () => {
             <View style={styles.snowTableRow}>
               <View style={styles.tableCell}>
                 <Text style={styles.tableItem}>
-                  {soliResponse['SnowReport']['MidMountainArea']['SinceLiftsClosedIn']}"
+                  {soliResponse.SnowReport.MidMountainArea.SinceLiftsClosedIn}"
                 </Text>
               </View>
               <View style={styles.tableCell}>
                 <Text style={styles.tableItem}>
-                  {soliResponse['SnowReport']['MidMountainArea']['Last24HoursIn']}"
+                  {soliResponse.SnowReport.MidMountainArea.Last24HoursIn}"
                 </Text>
               </View>
               <View style={styles.tableCell}>
                 <Text style={styles.tableItem}>
-                  {soliResponse['SnowReport']['MidMountainArea']['Last48HoursIn']}"
+                  {soliResponse.SnowReport.MidMountainArea.Last48HoursIn}"
                 </Text>
               </View>
               <View style={styles.tableCell}>
                 <Text style={styles.tableItem}>
-                  {soliResponse['SnowReport']['MidMountainArea']['Last72HoursIn']}"
+                  {soliResponse.SnowReport.MidMountainArea.Last72HoursIn}"
                 </Text>
               </View>
             </View>

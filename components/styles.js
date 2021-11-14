@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     display: 'flex',
     alignItems: 'center',
-    height: '80%'
+    height: '80%',
   },
   snowPage: {
     backgroundColor: '#fff',
@@ -100,10 +100,9 @@ const styles = StyleSheet.create({
   },
   areaRow: {
     display: 'flex',
-    flex: 1,
     flexDirection: 'row',
+    width: '100%',
     alignItems: 'center',
-    width: '98%',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 14,

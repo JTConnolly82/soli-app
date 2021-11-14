@@ -45,33 +45,35 @@ const Home = () => {
         <>
         <View style={styles.row}>
           <View style={styles.cell}> 
-            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse['SnowReport']['TotalOpenTrails'] == 0 ? .5 / 82 : soliResponse['SnowReport']['TotalOpenLifts'] / soliResponse['SnowReport']['TotalLifts']} progressColor={'#d2af26'} />
+            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse.SnowReport.TotalOpenTrails == 0 ? .5 / 82 : soliResponse.SnowReport.TotalOpenLifts / soliResponse.SnowReport.TotalLifts} progressColor={'#d2af26'} />
             <View style={styles.totalLifts}>
-              <Text style={styles.amount}>{soliResponse['SnowReport']['TotalLifts']}</Text>
+              <Text style={styles.amount}>{soliResponse.SnowReport.TotalLifts}</Text>
             </View>
             <Text style={styles.description}>Lifts</Text>
           </View>
           <View style={styles.cell}>
-            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse['SnowReport']['TotalOpenTrails'] == 0 ? .5 / 82 : soliResponse['SnowReport']['TotalOpenTrails'] / soliResponse['SnowReport']['TotalTrails']} progressColor={'#d2af26'} />
+            <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse.SnowReport.TotalOpenTrails == 0 ? .5 / 82 : soliResponse.SnowReport.TotalOpenTrails / soliResponse.SnowReport.TotalTrails} progressColor={'#d2af26'} />
             <View style={styles.totalRuns}>
-              <Text style={styles.amount}>{soliResponse['SnowReport']['TotalTrails']}</Text>
+              <Text style={styles.amount}>{soliResponse.SnowReport.TotalTrails}</Text>
               <Text></Text>
             </View>
             <Text style={styles.description}>Runs</Text>
           </View>
         </View>
+        <View>
           <FlatList
               data={soliResponse.MountainAreas}
               keyExtractor={(item) => item.Name}
               renderItem={({item}) => (
                 
                 <View style={styles.areaRow}>
-                  <Text style={styles.areaTitle}>{item['Name']}</Text>
-                  <Text style={styles.areaStatus}>{item['OpenTrailsCount'] > 0 ? 'Open' : 'Closed'}</Text>
+                  <Text style={styles.areaTitle}>{item.Name}</Text>
+                  <Text style={styles.areaStatus}>{item.OpenTrailsCount > 0 ? 'Open' : 'Closed'}</Text>
                 </View>
               )}
           />
-        <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {soliResponse['LastUpdate']}</Text>
+        </View>
+        <Text style={{textAlign: 'center', color: '#b1b1b1', fontSize: 12}}>Updated: {soliResponse.LastUpdate}</Text>
         </>
         )}
       </View>
