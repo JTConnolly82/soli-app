@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View, Text } from 'react-native';
-import axios from 'axios'
 
 import styles from '../components/styles';
-import Webcams from '../components/Webcams'
+import Webcams from '../components/Webcams';
 
 
 
 const SnowReport = () => {
 
-  const [isLoading, setLoading] = useState(true)
-  const [soliResponse, setSoliResponse] = useState([])
-  const [forecastIcon, setForecastIcon] = useState("")
-  const [currentWeatherIcon, setcurrentWeatherIcon] = useState("")
+  const [isLoading, setLoading] = useState(true);
+  const [soliResponse, setSoliResponse] = useState([]);
+  const [forecastIcon, setForecastIcon] = useState('');
+  const [currentIcon, setCurrentIcon] = useState('');
 
   const getInfo = async () => {
      try {
@@ -28,7 +27,35 @@ const SnowReport = () => {
   
   useEffect(() => {
     getInfo();
+    setForecastIcon(selectIcon(soliResponse.Forecast.OneDay.conditions))
+    setCurrentIcon(selectIcon(soliResponse.CurrentConditions.MidMountain.Conditions))
   }, []);
+
+  //soliResponse.Forecast.OneDay.conditions
+  const selectIcon = (forecastTime) => {
+    switch(forecastTime) {
+      case 'sunny':
+        return '☀️'
+        break
+      case 'cloudy':
+        return '☁️'
+        break
+      case 'mostly_sunny':
+        return '🌤'
+        break
+      case 'mostly_cloudy':
+        return '🌥'
+        break
+      case 'snow':
+        return '🌨'
+        break
+      case 'rain':
+        return '🌧'
+        break
+      default:
+        return forecastTime
+    }
+  }
 
 
   return (
@@ -38,14 +65,14 @@ const SnowReport = () => {
           <View style={styles.weatherWrapper}>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Today</Text>
-            <Text>{soliResponse.CurrentConditions.MidMountain.Skies}</Text>
+            {/* <Text>{soliResponse.Forecast.OneDay.conditions}</Text> */}
             <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.Forecast.TempHighF)} / {Math.round(soliResponse.Forecast.TempLowF)} °F</Text>
           </View>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Current</Text>
-            <Text>{soliResponse.CurrentConditions.MidMountain.Skies}</Text>
-            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentWeatherIcon}</Text>
+            {/* <Text>{soliResponse.CurrentConditions.MidMountain.Conditions}</Text> */}
+            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentIcon}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.CurrentConditions.MidMountain.TemperatureF)} °F</Text>
           </View>
         </View>

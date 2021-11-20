@@ -20,8 +20,8 @@ import styles from '../components/styles';
 
 const Home = () => {
 
-  const [isLoading, setLoading] = useState(true)
-  const [soliResponse, setSoliResponse] = useState([])
+  const [isLoading, setLoading] = useState(true);
+  const [soliResponse, setSoliResponse] = useState([]);
 
   const getInfo = async () => {
      try {
