@@ -12,26 +12,22 @@ const SnowReport = () => {
   const [soliResponse, setSoliResponse] = useState([]);
   const [forecastIcon, setForecastIcon] = useState('');
   const [currentIcon, setCurrentIcon] = useState('');
-
-  const getInfo = async () => {
-     try {
-      const response = await fetch("https://alerts.quicktrax.com/feed?resortId=65&format=json");
-      const json = await response.json();
-      setSoliResponse(json);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
   
   useEffect(() => {
-    getInfo();
-    setForecastIcon(selectIcon(soliResponse.Forecast.OneDay.conditions))
-    setCurrentIcon(selectIcon(soliResponse.CurrentConditions.MidMountain.Conditions))
+    async function getInfo() {
+      let response = await fetch("https://alerts.quicktrax.com/feed?resortId=65&format=json");
+      let json = await response.json();
+      setSoliResponse(json);
+      let forecast = selectIcon(json.Forecast.OneDay.conditions)
+      let current = selectIcon(json.CurrentConditions.MidMountain.Conditions)
+      setForecastIcon(forecast);
+      setCurrentIcon(current);
+      setLoading(false);
+    }
+
+    getInfo()
   }, []);
 
-  //soliResponse.Forecast.OneDay.conditions
   const selectIcon = (forecastTime) => {
     switch(forecastTime) {
       case 'sunny':
@@ -39,6 +35,9 @@ const SnowReport = () => {
         break
       case 'cloudy':
         return '☁️'
+        break
+      case 'partlycloudy':
+        return '⛅️'
         break
       case 'mostly_sunny':
         return '🌤'
@@ -66,13 +65,13 @@ const SnowReport = () => {
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Today</Text>
             {/* <Text>{soliResponse.Forecast.OneDay.conditions}</Text> */}
-            <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon}</Text>
+            <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon ? forecastIcon : ''}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.Forecast.TempHighF)} / {Math.round(soliResponse.Forecast.TempLowF)} °F</Text>
           </View>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Current</Text>
             {/* <Text>{soliResponse.CurrentConditions.MidMountain.Conditions}</Text> */}
-            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentIcon}</Text>
+            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentIcon ? currentIcon : ''}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.CurrentConditions.MidMountain.TemperatureF)} °F</Text>
           </View>
         </View>
