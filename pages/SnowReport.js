@@ -48,6 +48,9 @@ const SnowReport = () => {
       case 'snow':
         return '🌨'
         break
+      case 'clear':
+        return '🌙'
+        break
       case 'rain':
         return '🌧'
         break
