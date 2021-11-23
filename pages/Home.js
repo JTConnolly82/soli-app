@@ -47,14 +47,14 @@ const Home = () => {
           <View style={styles.cell}> 
             <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse.SnowReport.TotalOpenTrails == 0 ? .5 / 82 : soliResponse.SnowReport.TotalOpenLifts / soliResponse.SnowReport.TotalLifts} progressColor={'#d2af26'} />
             <View style={styles.totalLifts}>
-              <Text style={styles.amount}>{soliResponse.SnowReport.TotalLifts}</Text>
+              <Text style={styles.amount}>{soliResponse.SnowReport.TotalOpenLifts}/<Text style={{fontSize: '21px'}}>{soliResponse.SnowReport.TotalLifts}</Text></Text>
             </View>
             <Text style={styles.description}>Lifts</Text>
           </View>
           <View style={styles.cell}>
             <ProgressCircle style={{ height: 110 }} cornerRadius={4} backgroundColor={'#ddeaf9'} strokeWidth={12} progress={soliResponse.SnowReport.TotalOpenTrails == 0 ? .5 / 82 : soliResponse.SnowReport.TotalOpenTrails / soliResponse.SnowReport.TotalTrails} progressColor={'#d2af26'} />
             <View style={styles.totalRuns}>
-              <Text style={styles.amount}>{soliResponse.SnowReport.TotalTrails}</Text>
+              <Text style={styles.amount}>{soliResponse.SnowReport.TotalOpenTrails}/<Text style={{fontSize: '21px'}}>{soliResponse.SnowReport.TotalTrails}</Text></Text>
               <Text></Text>
             </View>
             <Text style={styles.description}>Runs</Text>

@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
   totalLifts: {
     position: 'absolute',
     top: '34%',
-    left: '48%',
+    left: '43%',
   },
   totalRuns: {
     position: 'absolute',
     top: '34%',
-    left: '44%',
+    left: '40%',
   },
   amount: {
     fontSize: 30,
