@@ -68,13 +68,13 @@ const SnowReport = () => {
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Today</Text>
             {/* <Text>{soliResponse.Forecast.OneDay.conditions}</Text> */}
-            <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon ? forecastIcon : ''}</Text>
+            <Text style={{fontSize: 50, textAlign: 'center'}}>{forecastIcon ? forecastIcon : '⛄️'}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.Forecast.TempHighF)} / {Math.round(soliResponse.Forecast.TempLowF)} °F</Text>
           </View>
           <View style={styles.weatherDiv}>
             <Text style={styles.weatherTitle}>Current</Text>
             {/* <Text>{soliResponse.CurrentConditions.MidMountain.Conditions}</Text> */}
-            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentIcon ? currentIcon : ''}</Text>
+            <Text style={{fontSize: 50, textAlign: 'center'}}>{currentIcon ? currentIcon : '⛄️'}</Text>
             <Text style={styles.temps}>{Math.round(soliResponse.CurrentConditions.MidMountain.TemperatureF)} °F</Text>
           </View>
         </View>
