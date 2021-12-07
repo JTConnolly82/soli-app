@@ -45,6 +45,9 @@ const SnowReport = () => {
       case 'mostly_cloudy':
         return '🌥'
         break
+      case 'mostlycloudy':
+        return '🌥'
+        break
       case 'snow':
         return '🌨'
         break
