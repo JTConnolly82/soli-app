@@ -57,6 +57,9 @@ const SnowReport = () => {
       case 'rain':
         return '🌧'
         break
+      case 'fog':
+        return '🌁'
+        break
       default:
         return forecastTime
     }
