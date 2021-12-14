@@ -36,6 +36,9 @@ const SnowReport = () => {
       case 'cloudy':
         return '☁️'
         break
+      case 'partly_cloudy':
+        return '⛅️'
+        break
       case 'partlycloudy':
         return '⛅️'
         break
